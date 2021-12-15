@@ -1,2 +1,2 @@
 # Platzi
-Portfolio Platz
+Portfolio Platzi

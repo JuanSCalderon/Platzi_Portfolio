@@ -4,6 +4,8 @@ import re
 import random
 import os
 import unicodedata
+import subprocess
+
 
 
 def read():
@@ -127,6 +129,8 @@ def main():
         |
     ========= 
     \033[0m \n ''')
+    
+
     chosen_word = read() #Crea la lista completa de palabras de data.txt
     chosen_word = random.choice(chosen_word) # Hace una escogencia aletoria de una de las palabras de la lista
     list_chosen_word = list(enumerate(chosen_word)) #Crea una lista numerada de cada una de las letras
@@ -137,13 +141,13 @@ def main():
         letter += letter
         hiden_word=letter.replace(letter, '_')
         print(hiden_word, end=' ')
-    print(f"\n{letter}")
+    # print(f"\n{letter}")
     attempts = 0
     while word != chosen_word and attempts < 6:
         user_letter = input('\n \nIngresa una letra: ').lower()    
         user_letter = normalize(user_letter)
         if user_letter.isalpha() == True and len(user_letter) == 1:
-            print(f'\n {user_letter.upper()}')
+            print(f'\n \033[92m{user_letter.lower()} \033[0m')
             
             for i2 in range(len(chosen_word)):
                 chosen_letters = chosen_word[i2]
@@ -153,15 +157,15 @@ def main():
                     validador = 1
                 else:
                     validador == 0
-                if user_letter == chosen_letters:
-                        word += chosen_letters
-            for i in range(len(word)):
-                if user_letter == word[i]:
-                    print(f"La letra {user_letter} ya la usaste")
-                    continue
-                # word += word.insert(enumerate(chosen_letters),chosen_word[i2])
-                print(word)
-                print(f"Wow vas súper, si está la letra: {user_letter}")
+                if user_letter == chosen_word[i2]:
+                    word += user_letter
+                    # word = word.insert(1,chosen_word[i2])
+                    for i in range(len(word)):
+                            if user_letter == word[:]:
+                                print(f"La letra {user_letter} ya la usaste")
+                                continue
+                            print(word)
+                            print(f"Wow vas súper, si está la letra: {user_letter}")
 
                 if user_letter != chosen_word[:]:
                     print(f" La letra: {user_letter} no está" ) 
@@ -241,14 +245,20 @@ def main():
         / \ |
             |
         =========\033[0m\n''')
-        print('El juego acabó')
+        print('Perdistes')
+        repeat = input("¿Quieres volver a jugar? (S/N) ")
+        while repeat == 'S':
+            main()
+        else:
+            print('\n \033[91mEl juego acabó\033[0m\n')
+            exit()
+# repeat = input("Would you like to run the game again? (y/n) ")
+# if repeat == 'n':
+#     print('\n \033[1m\033[91m Gracias por jugar \n\033[0m')
         
     
-    
-    
-    
-        # Intentar crear una lista con la cantidad de letras de 'chosenword' ✅
-        # y hacer lo mismo que en reeplacements para cambiar letras por '_'
+    # Intentar crear una lista con la cantidad de letras de 'chosenword' ✅
+    # y hacer lo mismo que en reeplacements para cambiar letras por '_'
 
 
 

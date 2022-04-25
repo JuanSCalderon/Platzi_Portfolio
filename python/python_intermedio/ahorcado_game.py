@@ -4,7 +4,6 @@ import re
 import random
 import os
 import unicodedata
-import subprocess
 
 
 
@@ -33,57 +32,6 @@ def normalize(string): #Devuelve strings sin acentos
     for a, b in replacements:
         string = string.replace(a, b).replace(a.lower(), b.lower())
     return string 
-    
-    # HANGMAN = ['''
-    # +---+
-    # |   |
-    #     |
-    #     |
-    #     |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    #     |
-    #     |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    # |   |
-    #     |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    # /|   |
-    #     |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    # /|\  |
-    #     |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    # /|\  |
-    # /    |
-    #     |
-    # =========''', '''
-    # +---+
-    # |   |
-    # O   |
-    # /|\  |
-    # / \  |
-    #     |
-    # =========''']
     
 def main():
     
@@ -132,10 +80,16 @@ def main():
     
 
     chosen_word = read() #Crea la lista completa de palabras de data.txt
-    chosen_word = random.choice(chosen_word) # Hace una escogencia aletoria de una de las palabras de la lista
-    list_chosen_word = list(enumerate(chosen_word)) #Crea una lista numerada de cada una de las letras
+    chosen_word = random.choice(chosen_word)
+    list_chosen_word = [chosen_word] # Hace una escogencia aletoria de una de las palabras de la lista
+    # list_chosen_word = list(enumerate(chosen_word))
+    
+    # for index1, lettters1 in list_chosen_word:
+    #      index1 += index1
+    #      print(index1)#Crea una lista numerada de cada una de las letras
     print(list_chosen_word)
-    word = [] # Palabra que va armando el usuario
+    word = ''#Palabra que va armando el usuario
+    # word = list(enumerate(word)) # Palabra que va armando el usuario convertido a una lista enumerada
     print(chosen_word)
     for letter in chosen_word: #Crea un guión bajo por cada letra de la palabra
         letter += letter
@@ -148,27 +102,40 @@ def main():
         user_letter = normalize(user_letter)
         if user_letter.isalpha() == True and len(user_letter) == 1:
             print(f'\n \033[92m{user_letter.lower()} \033[0m')
-            
-            for i2 in range(len(chosen_word)):
-                chosen_letters = chosen_word[i2]
-                print(chosen_letters)
-                validador = 0
-                if re.search(user_letter, chosen_word[:]):
-                    validador = 1
-                else:
-                    validador == 0
-                if user_letter == chosen_word[i2]:
-                    word += user_letter
-                    # word = word.insert(1,chosen_word[i2])
-                    for i in range(len(word)):
-                            if user_letter == word[:]:
-                                print(f"La letra {user_letter} ya la usaste")
-                                continue
-                            print(word)
-                            print(f"Wow vas súper, si está la letra: {user_letter}")
+            validador = 0
+            if re.search(user_letter, chosen_word[:]):
+                word += user_letter
+                print(f"Wow vas súper, si está la letra: {user_letter}")
+                print(word)
+                validador = 1
+            else:
+                print(f" La letra: {user_letter} no está" ) 
 
-                if user_letter != chosen_word[:]:
-                    print(f" La letra: {user_letter} no está" ) 
+            if word == chosen_word:
+                print(f"\n\n\033[92mFelicidades, ganaste! La palabra era: {chosen_word} \033[0m")
+                repeat = input("¿Quieres volver a jugar? (S/N) ")
+                while repeat == 'S' or 's':
+                    main()
+                if repeat == 'N':
+                    print('\n \033[91mEl juego acabó\033[0m\n')
+                    exit()
+                    # hiden_word=hiden_word.replace(hiden_word[:], '_')
+                    # print(hiden_word, end=' ')
+                    
+            else:
+                validador == 0
+                # if user_letter == chosen_word[i2]:
+                #     word += user_letter
+                #     # word = word.insert(1,chosen_word[i2])
+                #     for i in range(len(word)):
+                #             if user_letter == word[:]:
+                #                 print(f"La letra {user_letter} ya la usaste")
+                #                 continue
+                #             print(word)
+                #             print(f"Wow vas súper, si está la letra: {user_letter}")
+
+                # if user_letter != chosen_word[:]:
+                #     print(f" La letra: {user_letter} no está" ) 
 
             if validador == 1:
                 attempts += 0
@@ -247,9 +214,9 @@ def main():
         =========\033[0m\n''')
         print('Perdistes')
         repeat = input("¿Quieres volver a jugar? (S/N) ")
-        while repeat == 'S':
+        while repeat == 'S'or 's':
             main()
-        else:
+        if repeat == 'N':
             print('\n \033[91mEl juego acabó\033[0m\n')
             exit()
 # repeat = input("Would you like to run the game again? (y/n) ")

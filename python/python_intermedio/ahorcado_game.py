@@ -117,7 +117,7 @@ def main():
                 while repeat == 's':
                     main()
                 else:
-                    print('\n \033[91mEl juego Sacabó\033[0m\n')
+                    print('\n \033[91mEl juego SSacabó\033[0m\n')
                     exit()
                     # hiden_word=hiden_word.replace(hiden_word[:], '_')
                     # print(hiden_word, end=' ')

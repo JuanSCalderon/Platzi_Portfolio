@@ -35,7 +35,7 @@ def normalize(string): #Devuelve strings sin acentos
     
 def main():
     
-    os.system('clear') 
+    # os.system('clear') 
     print('''\n \033[92m
 .______    __   _______ .__   __. ____    ____  _______ .__   __.  __   _______   ______                     
 |   _  \  |  | |   ____||  \ |  | \   \  /   / |   ____||  \ |  | |  | |       \ /  __  \                    
@@ -88,7 +88,7 @@ def main():
     #      index1 += index1
     #      print(index1)#Crea una lista numerada de cada una de las letras
     print(list_chosen_word)
-    word = ''#Palabra que va armando el usuario
+    word = []#Palabra que va armando el usuario
     # word = list(enumerate(word)) # Palabra que va armando el usuario convertido a una lista enumerada
     print(chosen_word)
     for letter in chosen_word: #Crea un guión bajo por cada letra de la palabra
@@ -111,12 +111,12 @@ def main():
             else:
                 print(f" La letra: {user_letter} no está" ) 
 
-            if word == chosen_word:
+            if ''.join(word) == chosen_word:
                 print(f"\n\n\033[92mFelicidades, ganaste! La palabra era: {chosen_word} \033[0m")
-                repeat = input("¿Quieres volver a jugar? (S/N) ")
-                while repeat == 'S' or 's':
+                repeat = input("¿Quieres volver a jugar? (S/N u otra tecla) ").lower()
+                while repeat == 's':
                     main()
-                if repeat == 'N':
+                else:
                     print('\n \033[91mEl juego acabó\033[0m\n')
                     exit()
                     # hiden_word=hiden_word.replace(hiden_word[:], '_')
@@ -203,7 +203,7 @@ def main():
             =========\033[0m\n''')
             continue
     else:
-        os.system('clear') 
+        # os.system('clear') 
         print('''\n \033[91mAHORCADO XD \n
         +---+
         |   |
@@ -213,12 +213,14 @@ def main():
             |
         =========\033[0m\n''')
         print('Perdistes')
-        repeat = input("¿Quieres volver a jugar? (S/N) ")
-        while repeat == 'S'or 's':
+        repeat = input("¿Quieres volver a jugar? (S/N u otra tecla) ").lower()
+        while repeat == 's':
             main()
-        if repeat == 'N':
+        else:
             print('\n \033[91mEl juego acabó\033[0m\n')
             exit()
+            
+
 # repeat = input("Would you like to run the game again? (y/n) ")
 # if repeat == 'n':
 #     print('\n \033[1m\033[91m Gracias por jugar \n\033[0m')

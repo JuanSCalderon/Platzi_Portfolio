@@ -81,12 +81,8 @@ def main():
 
     chosen_word = read() #Crea la lista completa de palabras de data.txt
     chosen_word = random.choice(chosen_word)
-    list_chosen_word = [chosen_word] # Hace una escogencia aletoria de una de las palabras de la lista
-    # list_chosen_word = list(enumerate(chosen_word))
-    
-    # for index1, lettters1 in list_chosen_word:
-    #      index1 += index1
-    #      print(index1)#Crea una lista numerada de cada una de las letras
+    # list_chosen_word = [chosen_word] # Hace una escogencia aletoria de una de las palabras de la lista
+    list_chosen_word = list(enumerate(chosen_word))
     print(list_chosen_word)
     word = []#Palabra que va armando el usuario
     # word = list(enumerate(word)) # Palabra que va armando el usuario convertido a una lista enumerada
@@ -104,13 +100,17 @@ def main():
             print(f'\n \033[92m{user_letter.lower()} \033[0m')
             validador = 0
             if re.search(user_letter, chosen_word[:]):
-                word += user_letter
+                word += user_letter #Agrega la letra al word. INVESTIGAR COMO AGREGAR O INSERTA UN VALOR VARIAS VECES CONTANDO EL INDEX EN DÓNDE SE ENCUETRA LA LETRA
+                #mientras la letra ingresada por el usuario esté en la palabra escogida aleatoriamente y no se haya agregado ya a la lista word
                 print(f"Wow vas súper, si está la letra: {user_letter}")
-                print(word)
+                print(f"Tu palabra va así {word}")
+                # for i in hiden_word: 
+                #     hiden_word = letter.replace(word[i], '_')
+                # print(hiden_word, end=' ')
                 validador = 1
             else:
                 print(f" La letra: {user_letter} no está" ) 
-
+            
             if ''.join(word) == chosen_word:
                 print(f"\n\n\033[92mFelicidades, ganaste! La palabra era: {chosen_word} \033[0m")
                 repeat = input("¿Quieres volver a jugar? (S/N u otra tecla) ").lower()
